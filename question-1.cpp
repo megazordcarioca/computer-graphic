@@ -20,9 +20,8 @@ void DrawCircle(){           //BLUE CIRCLE
   ini_y = 0.0;
   r = 0.25;
 
-  glClear(GL_COLOR_BUFFER_BIT);
-  glBegin(GL_POLYGON);     //START TO DRAW
   glColor3f(0.0f,0.0f,B); //DRAW IN BLUE COLOR
+  glBegin(GL_POLYGON);     //START TO DRAW
   for (int i = 0; i < CIRCUNFERENCE; i++){
     angle = (i*PI)/(CIRCUNFERENCE/2);
     x = ini_x+(cos(angle)*r);
@@ -30,11 +29,11 @@ void DrawCircle(){           //BLUE CIRCLE
     glVertex2f(x,y);
   }
   glEnd();
+  glFlush();
 }
 
 
 void DrawRetangle(){     //GREEN RETANGLE
-  glClear(GL_COLOR_BUFFER_BIT);
   glColor3f(0.0,G,0.0);
 
   glBegin(GL_POLYGON);
@@ -56,12 +55,10 @@ void DrawLosangle(){    //YELLOW LOSANGLE
 }
 
 void draw(){
-  glClearColor(0.0,0.0,0.0,0.0);
-	glClear(GL_COLOR_BUFFER_BIT);
+  glClear(GL_COLOR_BUFFER_BIT);
   glColor3f(R,G,B);     //FILL BACKGROUND WITH BLACK COLOR
-
-  //DrawRetangle();
-  //DrawLosangle();
+  DrawRetangle();
+  DrawLosangle();
   DrawCircle();
 }
 
