@@ -7,18 +7,18 @@
 //OpenGL - Boilerplate
 
 
-float R = 1.0; 
-float G = 1.0; 
-float B = 1.0;
-int rsize = 10;
-int width = 800;
-int lenght = 600;
+GLfloat R = 1.0; 
+GLfloat G = 1.0; 
+GLfloat B = 1.0;
+GLint rsize = 10;
+GLint width = 800;
+GLint height = 600;
 
 
 void DrawCircle(){
   GLfloat angle = 0;       //DECLARE LOCAL FLOAT ANGLE
-  int i = 0;
   GLfloat circle_pt = 100; //QUANTITY OF POINTS
+  int i = 0;
   glClear(GL_COLOR_BUFFER_BIT);
   glBegin(GL_POLYGON);
 
@@ -37,6 +37,7 @@ void DrawRetangle(){
   glClear(GL_COLOR_BUFFER_BIT);
 
   glBegin(GL_POLYGON);
+    glColor3f(0.0f,G,0.0f);
     glVertex2f(0.2,0.0);
     glVertex2f(0.8,0.0);
     glVertex2f(0.8,0.4);
@@ -46,24 +47,24 @@ void DrawRetangle(){
 }
 
 void init(){
-  glClearColor(0.0,0.0,0.0,1.0);
+  glClearColor(0.0f,0.0f,0.0f,1.0f);
 }
 
 void Draw(){
   //glClearColor( 0.0, 0.0, 0.0, 1.0 );     //FILL BACKGROUND WITH BLACK COLOR
-    glColor3f(1.0f, 1.0f, 1.0f);
     DrawRetangle();
     //DrawLosangle();
     DrawCircle();
 }
 
 int main(GLint argc, GLchar** argv){
-  glutInit(& argc, argv);
+  glutInit(&argc, argv);
   int mode = GLUT_RGB | GLUT_DOUBLE;
-  glutInitDisplayMode( mode );
-  glutCreateWindow( "Bandeira do Brasil" );
+  glutInitDisplayMode(mode);
+  glutInitWindowSize(width,height);
+  glutCreateWindow("Bandeira do Brasil");
   init();
-  glutDisplayFunc( Draw ); 
-  glutMainLoop( );
+  glutDisplayFunc(Draw);
+  glutMainLoop();
   return 0;
 }
