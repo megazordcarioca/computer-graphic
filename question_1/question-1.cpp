@@ -45,7 +45,7 @@ void DrawRetangle(){     //GREEN RETANGLE
 }
 
 void DrawLosangle(){    //YELLOW LOSANGLE
-  glColor3f(1.0, 1.0, 0.0);
+  glColor3f(R, G, 0.0);
   glBegin(GL_POLYGON);
 	glVertex2f(0.0, 0.40);
 	glVertex2f(-1.0, 0.0);
