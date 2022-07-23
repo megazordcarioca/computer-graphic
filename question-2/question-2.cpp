@@ -39,39 +39,35 @@ int** ReadFile(const char* fileName, int lines, int columns)
 void Outline() 
 {
     int** numbers = ReadFile("Contorno.txt", LINES, COLUMNS);
-    glColor3f(0, 0, 1);
+    glColor3f(0.0, 0.0, 1.0);
     glBegin(GL_LINE_LOOP);
     for (int i = 0; i < LINES; i++) 
     {
-        glVertex2f(numbers[i][0], numbers[i][1]);
+      glVertex2f(numbers[i][0], numbers[i][1]);
     }
     glEnd();
+    glFlush();
 }
 
 void Draw()
 {
     float ang;
     int i;
+    glClearColor(0.0,0.0,0.0,0.0);
     glClear(GL_COLOR_BUFFER_BIT);
     Outline();
     glFlush();
 }
 
-void init()
-{
-    glClearColor(1, 1, 1, 0);
-}
-
 int main(int argc, char** argv)
 {
     glutInit( &argc, argv );
-    int mode = GLUT_RGB | GLUT_DOUBLE;
+    int mode = GLUT_SINGLE;
     glutInitDisplayMode(mode);
-    glutInitWindowSize(256, 256);
+    glutInitWindowSize(300,300);
     glutCreateWindow("Image");
-    init();
     glutDisplayFunc(Draw);
-    gluOrtho2D(0.0f, 128, 0.0f,128.0f);
+    //gluOrtho2D(0.0f, 128, 0.0f,128.0f);
     glutMainLoop();
     
     return 0;
