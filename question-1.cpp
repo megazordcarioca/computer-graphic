@@ -1,47 +1,58 @@
 #include <GL/glut.h>
 #include <math.h>
 
-#define PI 3.1415926535
-
+#define PI 3.141593
+#define CIRCUNFERENCE 360
 
 GLfloat R = 1.0; 
 GLfloat G = 1.0; 
 GLfloat B = 1.0;
-GLint rsize = 10;
 GLint width = 300;
 GLint height = 300;
 
 
-void DrawCircle(){
-  GLfloat angle = 0;       //DECLARE LOCAL FLOAT ANGLE
-  GLfloat circle_pt = 100; //QUANTITY OF POINTS
-  int i = 0;
-  glClear(GL_COLOR_BUFFER_BIT);
-  glBegin(GL_POLYGON);
-  glColor3f(0.0f,0.0f,B);
+void DrawCircle(){           //BLUE CIRCLE
 
-  //DRAW CIRCLE
-  for (i = 0; i < circle_pt; i++){
-    angle = 2*PI*i/circle_pt;
-    glVertex2f(130*cos(angle)+135, 170*sin(angle) + 140-rsize);
+  GLfloat x,y,r,ini_x, ini_y,angle;
+  GLfloat circle_pt = 100;  //QUANTITY OF POINTS
+
+  ini_x = 0.0;
+  ini_y = 0.0;
+  r = 0.25;
+
+  glClear(GL_COLOR_BUFFER_BIT);
+  glBegin(GL_POLYGON);     //START TO DRAW
+  glColor3f(0.0f,0.0f,B); //DRAW IN BLUE COLOR
+  for (int i = 0; i < CIRCUNFERENCE; i++){
+    angle = (i*PI)/(CIRCUNFERENCE/2);
+    x = ini_x+(cos(angle)*r);
+    y = ini_y+(sin(angle)*r);
+    glVertex2f(x,y);
   }
   glEnd();
-
-  glFlush();
 }
 
 
-void DrawRetangle(){
+void DrawRetangle(){     //GREEN RETANGLE
   glClear(GL_COLOR_BUFFER_BIT);
+  glColor3f(0.0,G,0.0);
 
   glBegin(GL_POLYGON);
-    glColor3f(0.0f,G,0.0f);
-    glVertex2f(0.2,0.0);
-    glVertex2f(0.8,0.0);
-    glVertex2f(0.8,0.4);
-    glVertex2f(0.2,0.4);
+    glVertex2f(-1.0,  0.5);
+    glVertex2f(-1.0, -0.5);
+    glVertex2f(1.0,  -0.5);
+    glVertex2f(1.0,   0.5);
   glEnd();
-  glFlush();
+}
+
+void DrawLosangle(){    //YELLOW LOSANGLE
+  glColor3f(1.0, 1.0, 0.0);
+  glBegin(GL_POLYGON);
+	glVertex2f(0.0, 0.40);
+	glVertex2f(-1.0, 0.0);
+	glVertex2f(0.0, -0.40);
+	glVertex2f(1.0, 0.0);
+  glEnd();
 }
 
 void draw(){
