@@ -1,0 +1,118 @@
+#include <GL/glut.h> //using
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define WIDHT 128
+#define HEIGHT 128
+
+GLint **coordenatesList;
+GLint listSize = 0;
+GLchar *DELIMITER = " ";
+GLchar *fileName = "Contorno.txt";
+
+FILE* readFile()
+{
+    FILE* file = fopen(fileName, "r");
+    int i = 0;
+    if (file == NULL){
+      printf("Error while try to open file");
+      exit(1);
+    }
+    return file;
+}
+
+void closeFile(FILE* file){
+  fclose(file);
+}
+
+void makeOutline() 
+{
+    GLint **pointer = coordenatesList;
+    glColor3f(0.0, 0.0, 1.0);
+    glBegin(GL_LINE_LOOP);
+    for (int i = 0; i < listSize; i++) 
+    {
+      glVertex2i(pointer[i][0], pointer[i][1]);
+    }
+    glEnd();
+    glFlush();
+}
+
+void Draw()
+{
+    glClearColor(0.0,0.0,0.0,0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    makeOutline();
+    glFlush();
+}
+
+GLint getMaxValueFromCoordenates(){
+    GLint maxValue = 0;
+    GLint** pointer = coordenatesList;
+
+    for (GLint index = 0; index < listSize;index++){
+        for (GLint i=0;i<=1;i++){ 
+            if (pointer[index][i] > maxValue){
+                maxValue = pointer[index][i];
+            }
+        }
+    }
+    
+    return maxValue;
+}
+
+int analyseCoordenatesFromFile(){
+    GLchar row[50];
+    GLchar *str;
+    
+    FILE *file = readFile();
+
+    GLint count = 0;
+    coordenatesList = (GLint **)malloc(10 * sizeof(GLint*));
+
+    while((fgets(row,50,file)) != NULL){
+        GLint x, y;
+        GLint* coordenates = (GLint *)malloc(2 * sizeof(GLint));
+        GLboolean updated = 0;
+
+        str = strtok(row, DELIMITER);
+        while(str!=NULL){
+            if(updated == 0)
+                x = atoi(str); 
+            else
+                y = atoi(str);
+            updated = 1;
+            str = strtok(NULL, DELIMITER);
+        }
+
+        if((count+1) % 10 == 0){
+          coordenatesList = realloc(coordenatesList,(count + 11) *sizeof(GLint*));
+        }
+
+        coordenates[0] = x;
+        coordenates[1] = y;
+
+        coordenatesList[count] = coordenates;
+        count++;
+    }
+    listSize = count;
+    closeFile(file);
+}
+
+
+int main(int argc, char** argv)
+{
+  analyseCoordenatesFromFile();
+  GLint maxValue = getMaxValueFromCoordenates();
+    glutInit( &argc, argv );
+    int mode = GLUT_SINGLE;
+    glutInitDisplayMode(mode);
+    glutInitWindowSize(300,300);
+    glutCreateWindow("Image");
+    glutDisplayFunc(Draw);
+    //gluOrtho2D(0.0f, 128, 0.0f,128.0f);
+    glutMainLoop();
+    
+    return 0;
+} 
