@@ -21,7 +21,7 @@ void DrawCircle(){           //BLUE CIRCLE
   r = 0.25;
 
   glColor3f(0.0f,0.0f,B); //DRAW IN BLUE COLOR
-  glBegin(GL_POLYGON);     //START TO DRAW
+  glBegin(GL_LINE_LOOP);     //START TO DRAW
   for (int i = 0; i < CIRCUNFERENCE; i++){
     angle = (i*PI)/(CIRCUNFERENCE/2);
     x = ini_x+(cos(angle)*r);

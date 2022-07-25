@@ -1,39 +1,41 @@
 #include<GL/glut.h>
-#define width 800
-#define height 600
+#define width 400
+#define height 300
 
 
 
 GLfloat R = 1.0; 
 GLfloat G = 1.0; 
 GLfloat B = 1.0;
-GLfloat x_inic;
-GLfloat y_inic;
+float x_inic;
+float y_inic;
 
-void move_to (GLfloat x, GLfloat y){ 
-    x_inic = x;
-    y_inic = y; 
-}
+void move_to (GLfloat x, GLfloat y);
 
 void line_to (GLfloat x, GLfloat y) { 
     glBegin(GL_LINES);
     glVertex2f(x_inic, y_inic); 
     glVertex2f(x, y); 
     glEnd(); 
-    move_to (x, y); 
     glFlush(); 
 }
 
+void move_to (GLfloat x, GLfloat y){ 
+    x_inic = x;
+    y_inic = y; 
+}
 void Draw(){
-  glClear(GL_COLOR_BUFFER_BIT);
-  glColor3f(R,G,B); //FILL BACKGROUND WITH BLACK COLOR
-    move_to (-3.0, -2.0);
-    line_to (3.0, 0.0);
-    line_to (-2.0, 3.0);
-    move_to (4.0, 1.0);
-    line_to (2.0, 4.0);
-    line_to (1.0, -2.0);
-    move_to (0.0, -3.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(R,G,B); //FILL BACKGROUND WITH BLACK COLOR
+    move_to(-0.3f, -0.2f);
+    line_to(0.3f,0.0f);
+    line_to(-0.2f, 0.3f);
+    move_to (0.4f, 0.1f);
+    line_to (0.2f, 0.4f);
+    line_to (0.1f, -0.2f);
+    move_to (0.0f, -0.3f);
+    /*
+     */
 }
 
 int main(GLint argc, GLchar** argv){
@@ -42,9 +44,6 @@ int main(GLint argc, GLchar** argv){
     glutInitWindowSize(width, height);
     glutCreateWindow("Questao 3");
     glutDisplayFunc(Draw);
-    //glutReshapeFunc( reshape ); 
-    //glutKeyboardFunc( key );
-    //glutIdleFunc( idle ); 
     
     glutMainLoop( );
 }
