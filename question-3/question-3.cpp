@@ -2,8 +2,6 @@
 #define width 400
 #define height 300
 
-
-
 GLfloat R = 1.0; 
 GLfloat G = 1.0; 
 GLfloat B = 1.0;
@@ -42,7 +40,7 @@ int main(GLint argc, GLchar** argv){
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(width, height);
-    glutCreateWindow("Questao 3");
+    glutCreateWindow("Questao 3 - Testing");
     glutDisplayFunc(Draw);
     
     glutMainLoop( );
